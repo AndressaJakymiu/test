@@ -13,18 +13,19 @@
 #include "libft.h"
 static int ft_overflow(long result, int sign, char c)
 {
-	if (result > 2147483647 / 10)
+	if (sign == 1)
 	{
-		if (sign == 1)
+		if (result > 2147483647 / 10 || (result == 2147483647 / 10 && c (c - '0') > 7 )
+	
 			return (-1);
+	}
+	else
+	{ 
+		if (result == 2147483647 / 10 || (result == 2147483648 / 10 && (c - '0') > 8)) 
 		return (0);
-	}
-	if (result == 2147483647 / 10 && (c - '0')) 
-	{
-		if (sign == 1)
-			return (-1);
-		retunr (0);
-	}
+	}	
+	
+	
 	return (1);
 }
 
