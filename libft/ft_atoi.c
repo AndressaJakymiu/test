@@ -21,8 +21,10 @@ static int ft_overflow(long result, int sign, char c)
 	}
 	else
 	{ 
-		if (result == 2147483647 / 10 || (result == 2147483648 / 10 && (c - '0') > 8)) 
-		return (0);
+		if (result > 2147483648 / 10)
+			return (0)
+		if (result == 2147483648 / 10 && (c - '0') > 8)) 
+			return (0);
 	}	
 	
 	
