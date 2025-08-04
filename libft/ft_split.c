@@ -26,75 +26,61 @@ char	**ft_free(char **strs, int j)
 	return (NULL);
 }
 
-int	ft_words(char const *str, char c)
+int	ft_words(char const *s, char c)
 {
 	int	count;
-	int	x;
 
 	count = 0;
-	x = 0;
-	while (*str == c)
-		str++;
-	while (*str)
+	while (*s)
 	{
-		if (*str != c && x == 0)
+		if (*s != c)
 		{
 			count++;
-			x = 1;
+			while (*s && *s != c)
+				s++;
 		}
-		else if (*str == c)
-		{
-			x = 0;
-		}
-		str++;
+		else
+			s++;
 	}
 	return (count);
 }
 
-int	word_len(char const *str, char c)
+char	**ft_fill(char **split, char const *s, char c)
 {
-	int	len;
-	int	i;
+	int		i;
+	int		len;
 
-	len = 0;
 	i = 0;
-	while (str[i])
+	while (*s)
 	{
-		if (str[i] != c)
+		if (*s != c)
 		{
-			len++;
+			len = 0;
+			while (*s && *s != c)
+			{
+				len++;
+				s++;
+			}
+			split[i] = ft_substr(s - len, 0, len);
+			if (!split[i])
+				return (ft_free(split, i));
+			i++;
 		}
-		else if (str[i] == c)
-			break ;
-		i++;
+		else
+			s++;
 	}
-	return (len);
+	split[i] = NULL;
+	return (split);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**total;
-	int		i;
-	int		j;
+	char	**split;
 
-	total = ft_calloc((ft_words(s, c) + 1), sizeof(char *));
-	if (!total)
+	if (!s)
 		return (NULL);
-	i = 0;
-	j = 0;
-	while (s[i])
-	{
-		if (s[i] != c)
-		{
-			total[j] = ft_substr(s, i, word_len(&s[i], c));
-			if (!total[j])
-				return (ft_free(total, j));
-			j++;
-			i += word_len(&s[i], c);
-		}
-		else
-			i++;
-	}
-	total[j] = 0;
-	return (total);
+	split = malloc(sizeof(char *) * (ft_words(s, c) + 1));
+	if (!split)
+		return (NULL);
+	return (ft_fill(split, s, c));
 }

@@ -11,31 +11,30 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-static int ft_overflow(long result, int sign, char c)
+
+static int	ft_overflow(long result, int sign, char c)
 {
 	if (sign == 1)
 	{
-		if (result > 2147483647 / 10 || (result == 2147483647 / 10 && c (c - '0') > 7 )
-	
+		if (result > 2147483647 / 10
+			|| (result == 2147483647 / 10 && (c - '0') > 7))
 			return (-1);
 	}
 	else
-	{ 
+	{
 		if (result > 2147483648 / 10)
-			return (0)
-		if (result == 2147483648 / 10 && (c - '0') > 8)) 
 			return (0);
-	}	
-	
-	
+		if (result == 2147483648 / 10 && (c - '0') > 8)
+			return (0);
+	}
 	return (1);
 }
 
 int	ft_atoi(const char *str)
 {
-	int		sign;
+	int			sign;
 	long		result;
-	int		overflow;
+	int			overflow;
 
 	sign = 1;
 	result = 0;
@@ -49,9 +48,9 @@ int	ft_atoi(const char *str)
 	}
 	while (*str >= '0' && *str <= '9')
 	{
-		overflow = ft_overflow(result, sign, *str)
+		overflow = ft_overflow(result, sign, *str);
 		if (overflow != 1)
-			retrurn (overflow);
+			return (overflow);
 		result = result * 10 + (*str - '0');
 		str++;
 	}

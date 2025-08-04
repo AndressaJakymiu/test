@@ -30,7 +30,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 
 	i = 0;
-	
 	if (!s)
 		return (NULL);
 	total = ft_strlen(s);
